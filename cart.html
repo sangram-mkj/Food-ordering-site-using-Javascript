@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+         #navbar{
+            display: inline-block;
+            height: 10vh;
+            width: 85%;
+            border: 1px solid black;
+            text-align: right;
+            margin-left: 7%;
+            border-radius: 5px;
+            
+        }
+        .navbar-header{
+            display: inline-block;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: right;
+            margin: 2%;
+        }
+        #mainDiv{
+            height: 65vh;
+            width: 80%;
+            border: 1px solid black;
+            border-bottom: none;
+            margin: auto;
+            margin-top: 3%;
+        }
+        #price{
+            border: 1px solid black;
+            border-bottom: none;
+            height: 10%;
+            width: 75%;
+            margin: auto;
+            padding: 0.5%;
+            margin-bottom: 2%;
+        }
+        #items{
+            border: 1px solid black;
+            border-bottom: none;
+            height: 85%;
+            width: 90%;
+            margin: auto;
+        }
+        .foods{
+            height: 30%;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 2.5fr 2fr 1fr 0.5fr;
+            border: 1px solid black;
+            grid-gap: 0%;
+            margin-bottom: 2%;
+        }
+        .image{
+            height: 100%;
+            width: 20%;
+            border-radius: 5px;
+            /* display: inline-block; */
+        }
+        /* .title{ */
+            /* display: inline-block;
+            vertical-align: top; */
+            /* margin: 2%; */
+        /* } */
+        /* .price{
+            display: inline-block;
+            vertical-align: top;
+        } */
+        .rmvBtn{
+            /* display: inline-block;
+            vertical-align: top; */
+            margin: 2%;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <div class="navbar-header" id="login"><a href="signIn.html"> Login</a></div>
+        <div class="navbar-header" id="signUp"><a href="signUp.html"> Sign Up</a></div>
+        <div class="navbar-header" id="menu"><a href="menu.html"> Menu</a></div>
+       <a href="payment.html"><div class="navbar-header" id="checkOut">Checkout</div></a>
+    </div>
+    
+
+    <div id="mainDiv">
+        <div id="price">
+        </div>
+        <div id="items">
+
+        </div>
+        
+    </div>
+</body>
+</html>
+
+<script>
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    let price = document.getElementById('price');
+
+    let totalCash = 0;
+    for(let k = 0; k < cartItems.length; k++) {
+        totalCash += cartItems[k].price;
+    }
+
+
+    price.textContent = `You have total ${cartItems.length} items in your cart. Enjoy your food by paying $ ${totalCash}`;
+
+    let items = document.getElementById('items');
+
+    for(let i = 0; i < cartItems.length; i++){
+        let lastDiv = document.createElement('div');
+        lastDiv.setAttribute('class', 'foods')
+    let img = document.createElement('img');
+    img.src = cartItems[i].img;
+    img.setAttribute('class', 'image')
+
+    let name = document.createElement('h2');
+    name.textContent = cartItems[i].title;
+    name.setAttribute('class', 'title')
+
+    let price = document.createElement('h3');
+    price.textContent = `$ ${cartItems[i].price}`;
+    price.setAttribute('class', 'price');
+
+    let removeButton = document.createElement('button');
+    removeButton.setAttribute('class', 'rmvBtn');
+    removeButton.textContent = 'Remove This Item';
+    removeButton.addEventListener('click', function() {
+        
+    })
+
+    let br = document.createElement('br')
+
+
+    lastDiv.append(img, name, price, removeButton);
+    items.append(lastDiv)
+
+
+    }
+function remove(cartItems){
+    console.log(cartItems)
+}
+    
+    
+
+
+    
+</script>
